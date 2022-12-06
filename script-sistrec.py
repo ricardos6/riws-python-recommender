@@ -32,13 +32,16 @@ df = df.groupby('movieId')
 df = df.filter(lambda x: len(x) > 5)
 print("Number of users: " + str(df.nunique()['userId']))
 print("Number of movies: " + str(df.nunique()['movieId']))
-# print(df['movieId'].value_counts(ascending=True))
 
 print("\nRemoving users with less than 10 ratings...")
 df = df.groupby('userId')
 df = df.filter(lambda x: len(x) > 5)
 print("Number of users: " + str(df.nunique()['userId']))
 print("Number of movies: " + str(df.nunique()['movieId']))
+
+# Ordenando los campos por numero de valores ascendente podemos asegurarnos que no haya
+# peliculas con menos de 5 puntuaciones o usuarios con menos de 10 puntuaciones
+# print(df['movieId'].value_counts(ascending=True))
 # print(df['userId'].value_counts(ascending=True))
 
 print("\nSize of matrix: " + str(df.shape))
