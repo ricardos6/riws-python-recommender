@@ -12,26 +12,26 @@ data = Dataset.load_builtin("ml-100k")
 
 # Option 1
 
-print("Option 1")
+# print("****** Option 1 ******")
 
 # Define a CF algorithm.
 algo = SVD()
 
-trainset = data.build_full_trainset()
+# trainset = data.build_full_trainset()
 
-algo.fit(trainset)
+# algo.fit(trainset)
 
-uid = str(196)  # raw user id (as in the ratings file). They are strings!
-iid = str(845)  # raw item id (as in the ratings file). They are strings!
+# uid = str(196)  # raw user id (as in the ratings file). They are strings!
+# iid = str(845)  # raw item id (as in the ratings file). They are strings!
 
-# data.raw_ratings is a tuple (user, item, rating, timestamp) list
-rui = [r for (u, i, r, _) in data.raw_ratings if (u == uid) & (i == iid)]
-rui = rui[0] if len(rui) > 0 else None
+# # data.raw_ratings is a tuple (user, item, rating, timestamp) list
+# rui = [r for (u, i, r, _) in data.raw_ratings if (u == uid) & (i == iid)]
+# rui = rui[0] if len(rui) > 0 else None
     
-pred = algo.predict(uid, iid, r_ui = rui, verbose=True)
+# pred = algo.predict(uid, iid, r_ui = rui, verbose=True)
 
 # Option 2
-print ("Option 2")
+print ("\n****** Option 2 ******")
 
 # sample random trainset and testset
 # test set is made of 20% of the ratings.
@@ -45,7 +45,7 @@ predictions = algo.test(testset)
 accuracy.rmse(predictions)
 
 # Option 3.1
-print ("Option 3.1")
+print ("\n****** Option 3.1 ******")
 
 # define a cross-validation iterator
 kf = KFold(n_splits=5)
@@ -76,7 +76,7 @@ for i, (trainset_cv, testset_cv) in enumerate(kf.split(data)):
 
 # Option 3.2
 
-print ("Option 3.2")
+print ("\n****** Option 3.2 ******")
 
 algo = SVD()
 
