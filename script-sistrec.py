@@ -1,10 +1,13 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# py -m pip install pandas
+
 
 # Read csv file
 df = pd.read_csv('ratings.csv')
-# print(df.to_string())
-
 # * Paso 1.
 # Realizar una exploración inicial indicando el número de valor vacíos (NA), el
 # número de muestras duplicadas, y el número de usuarios, productos y
@@ -47,3 +50,48 @@ print("Number of movies: " + str(df.nunique()['movieId']))
 print("\nSize of matrix: " + str(df.shape))
 
 print("\n--------------------------------------------------------------------------\n")
+# * Paso 3.
+# Representar en un histograma el número de puntuaciones por usuario.
+# Hacer lo mismo con el número de puntuaciones por producto.
+
+# Numero de puntuaciones por usuario
+sns.displot(df, x="userId")
+
+# Numero de puntuaciones por pelicula
+
+sns.displot(df, x="movieId")
+
+plt.show()
+
+print("\n--------------------------------------------------------------------------\n")
+
+# * Paso 4
+# Representar en un histograma la media de puntuaciones por usuario.
+# Hacer lo mismo con la media de puntuaciones por producto.
+
+mean_df = df.groupby('userId', as_index=False)['rating'].mean()
+
+# Miramos la tabla para ver que tiene sentido
+# print(df.groupby('userId', as_index=False)['rating'].mean())
+
+# Opcion a (seguramente este mal)
+# sns.barplot(df.groupby('userId', as_index=False).mean('rating')[['userId', 'rating']], x='userId', y='rating')
+
+# Opcion b
+sns.displot(mean_df, x='rating').set(xlabel='rating', ylabel='count users')
+
+sns.displot(mean_df, x='rating').set(xlabel='rating', ylabel='count movies')
+
+plt.show()
+
+print("\n--------------------------------------------------------------------------\n")
+
+# * Paso 5
+# Representar en un diagrama de barras la distribución de las
+# puntuaciones.
+
+# print(df)
+
+sns.displot(df, x='rating')
+
+plt.show()
